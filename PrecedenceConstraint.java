@@ -15,12 +15,9 @@ public class PrecedenceConstraint {
 
   public boolean isSatisfied(GregorianCalendar date1, GregorianCalendar date2){
 
-    int hour = this.first.getDuree()/60;
-    int minutes = this.first.getDuree() % 60;
+    date1 = new GregorianCalendar(date1.get(GregorianCalendar.YEAR),date1.get(GregorianCalendar.MONTH),date1.get(GregorianCalendar.DAY_OF_MONTH),date1.get(GregorianCalendar.HOUR_OF_DAY), date1.get(GregorianCalendar.MINUTE) + this.first.getDuree());
 
-    date1 = new GregorianCalendar(date1.get(GregorianCalendar.YEAR),date1.get(GregorianCalendar.MONTH),date1.get(GregorianCalendar.DAY_OF_MONTH),(date1.get(GregorianCalendar.HOUR_OF_DAY))%24 + hour, date1.get(GregorianCalendar.MINUTE) + minutes);
-
-    if (date1.before(date2)){
+    if (date1.compareTo(date2)<0){
       return true;
     } else {
       return false;
