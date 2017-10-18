@@ -38,7 +38,7 @@ class Main {
     } else {
       System.out.println("Non Satisfaite");
     }
-    */
+
 
     Activity options = new Activity ("Manger des Chocapic", 70);
     Activity ip = new Activity ("Faire une game de LOL", 45);
@@ -52,6 +52,7 @@ class Main {
     PrecedenceConstraintWithDuration contrainte1 = new PrecedenceConstraintWithDuration(options,ip,40,50);
 
     System.out.println("" + contrainte1.isSatisfied(date1,date2));
+    */
 
 
 

@@ -12,9 +12,13 @@ public class Schedule {
   public Schedule(HashMap<Activity, GregorianCalendar> edt){
     this.edt = edt;
   }
-  /*
-  public schedule(Activity activite, GregorianCalendar date){
-    this.edt.put(activite,date);
+
+  public boolean satisfies(ArrayList<PrecedenceConstraint> contraintes){
+    for(int i=0;i<contraintes.size();i++){
+      if (!contraintes.get(i).isSatisfied(edt[contraintes.get(i).first],edt[contraintes.get(i).second])){
+        return false;
+      }
+    }
+    return true;
   }
-  */
 }
