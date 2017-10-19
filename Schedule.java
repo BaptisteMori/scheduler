@@ -14,8 +14,8 @@ public class Schedule {
   }
 
   public boolean satisfies(ArrayList<PrecedenceConstraint> contraintes){
-    for(int i=0;i<contraintes.size();i++){
-      if (!contraintes.get(i).isSatisfied(edt[contraintes.get(i).first],edt[contraintes.get(i).second])){
+    for(int i = 0; i < contraintes.size(); i++){
+      if (!contraintes.get(i).isSatisfied(edt.get(contraintes.get(i).first),edt.get(contraintes.get(i).second))) {
         return false;
       }
     }

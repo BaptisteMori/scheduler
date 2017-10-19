@@ -3,6 +3,8 @@ package edt_java;
 
 import java.util.GregorianCalendar;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 class Main {
 
@@ -38,7 +40,7 @@ class Main {
     } else {
       System.out.println("Non Satisfaite");
     }
-
+    */
 
     Activity options = new Activity ("Manger des Chocapic", 70);
     Activity ip = new Activity ("Faire une game de LOL", 45);
@@ -51,9 +53,16 @@ class Main {
 
     PrecedenceConstraintWithDuration contrainte1 = new PrecedenceConstraintWithDuration(options,ip,40,50);
 
-    System.out.println("" + contrainte1.isSatisfied(date1,date2));
-    */
+    //System.out.println("" + contrainte1.isSatisfied(date1,date2));
 
+    HashMap<Activity, GregorianCalendar> edt = new HashMap<> ();
+    edt.put(options,date1);
+    edt.put(ip,date2);
+
+
+    for (<Activity,GregorianCalendar> x: edt) {
+      System.out.println("" + act.getDuree() + " " + edt.get(act).get(GregorianCalendar.YEAR));
+    }
 
 
   }
