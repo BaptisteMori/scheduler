@@ -9,6 +9,10 @@ class Activity {
 		this.duree=duree;
 	}
 
+	public String getAction() {
+		return this.action;
+	}
+
 	public int getDuree(){
 		return this.duree;
 	}

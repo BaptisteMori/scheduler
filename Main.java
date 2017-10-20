@@ -75,5 +75,7 @@ class Main {
       System.out.println("Test pas ok du tout");
     }
 
+    System.out.println(edt.toString());
+
   }
 }
