@@ -70,6 +70,7 @@ public class Schedule {
   }
 
   public void computeSchedule(ArrayList<Activity> l_act,ArrayList<PrecedenceConstraint> l_contr) {
+    
     ArrayList<Activity> l_planified = new ArrayList<> ();
     GregorianCalendar date = new GregorianCalendar(2009,6,10,9,0);
     Activity act;

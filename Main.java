@@ -79,12 +79,10 @@ class Main {
     edt.computeSchedule(activities,list_contraintes);
 
     if (edt.satisfies(list_contraintes)) {
-      System.out.println("Test ok");
+      System.out.println(edt.toString());
     } else {
-      System.out.println("Test pas ok du tout");
+      System.out.println("Probleme dans l'emploi du temps");
     }
-
-    System.out.println(edt.toString());
 
   }
 }
