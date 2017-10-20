@@ -9,8 +9,12 @@ public class Schedule {
 
   private HashMap<Activity, GregorianCalendar> edt;
 
-  public Schedule(HashMap<Activity, GregorianCalendar> edt){
-    this.edt = edt;
+  public Schedule(){
+    this.edt = new HashMap<> ();
+  }
+
+  public void schedule(Activity act, GregorianCalendar date){
+    this.edt.put(act,date);
   }
 
   public boolean satisfies(ArrayList<PrecedenceConstraint> contraintes){

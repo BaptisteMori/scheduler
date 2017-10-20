@@ -11,10 +11,10 @@ class Main {
   public static void main (String[] args) {
 
     /*
-    Activity options = new Activity ("Manger des Chocapic", 70);
-    Activity ip = new Activity ("Faire une game de LOL", 45);
+    Activity act1 = new Activity ("Manger des Chocapic", 70);
+    Activity act2 = new Activity ("Faire une game de LOL", 45);
 
-    PrecedenceConstraint contrainte = new PrecedenceConstraint (options, ip);
+    PrecedenceConstraint contrainte = new PrecedenceConstraint (act1, act2);
 
     GregorianCalendar date1 = new GregorianCalendar(2008,0,1,23,0);
     GregorianCalendar date2 = new GregorianCalendar(2008,0,2,0,0);
@@ -42,28 +42,38 @@ class Main {
     }
     */
 
-    Activity options = new Activity ("Manger des Chocapic", 70);
-    Activity ip = new Activity ("Faire une game de LOL", 45);
+    Activity act1 = new Activity ("Manger des Chocapic", 70);
+    Activity act2 = new Activity ("Faire une game de LOL", 45);
+    Activity act3 = new Activity ("Regarder Koh-Lanta", 120);
+    Activity act4 = new Activity ("Réviser", 5);
 
-    PrecedenceConstraint contrainte = new PrecedenceConstraint (options, ip);
+    PrecedenceConstraint contrainte1 = new PrecedenceConstraint (act1, act2);
+    PrecedenceConstraint contrainte2 = new PrecedenceConstraint (act2, act3);
+    PrecedenceConstraint contrainte3 = new PrecedenceConstraint (act3, act4);
+
+    ArrayList<PrecedenceConstraint> list_contraintes = new ArrayList<> ();
+    list_contraintes.add(contrainte1);
+    list_contraintes.add(contrainte2);
+    list_contraintes.add(contrainte3);
 
     GregorianCalendar date1 = new GregorianCalendar(2008,0,1,23,0);
-    GregorianCalendar date2 = new GregorianCalendar(2008,0,2,1,0);
-    GregorianCalendar date3 = new GregorianCalendar(2017,6,24,15,0);
+    GregorianCalendar date2 = new GregorianCalendar(2008,0,2,0,10);
+    GregorianCalendar date3 = new GregorianCalendar(2010,6,24,15,0);
+    GregorianCalendar date4 = new GregorianCalendar(2017,4,16,8,0);
 
-    PrecedenceConstraintWithDuration contrainte1 = new PrecedenceConstraintWithDuration(options,ip,40,50);
+    //PrecedenceConstraintWithDuration contrainte1 = new PrecedenceConstraintWithDuration(act1,act2,40,50);
 
-    //System.out.println("" + contrainte1.isSatisfied(date1,date2));
+    Schedule edt = new Schedule();
+    edt.schedule(act1,date1);
+    edt.schedule(act2,date2);
+    edt.schedule(act3,date3);
+    edt.schedule(act4,date4);
 
-    HashMap<Activity, GregorianCalendar> edt = new HashMap<> ();
-    edt.put(options,date1);
-    edt.put(ip,date2);
-
-
-    for (<Activity,GregorianCalendar> x: edt) {
-      System.out.println("" + act.getDuree() + " " + edt.get(act).get(GregorianCalendar.YEAR));
+    if (edt.satisfies(list_contraintes)) {
+      System.out.println("Test ok");
+    } else {
+      System.out.println("Test pas ok du tout");
     }
-
 
   }
 }
