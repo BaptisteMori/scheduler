@@ -64,10 +64,12 @@ class Main {
     //PrecedenceConstraintWithDuration contrainte1 = new PrecedenceConstraintWithDuration(act1,act2,40,50);
 
     Schedule edt = new Schedule();
+    /*
     edt.schedule(act1,date1);
     edt.schedule(act2,date2);
     edt.schedule(act3,date3);
     edt.schedule(act4,date4);
+    */
 
     if (edt.satisfies(list_contraintes)) {
       System.out.println("Test ok");

@@ -55,4 +55,28 @@ public class Schedule {
     }
     return ch;
   }
+
+  private Activity next(ArrayList<Activity> l_act, ArrayList<PrecedenceConstraint> l_contr,ArrayList<Activity> l_planified) {
+    for (Activity x : l_act) {
+      if (! l_planified.contains(x)) {
+        for (PrecedenceConstraint y : l_contr) {
+          if (! x == y.sceond) {
+            return x;
+          }
+        }
+      }
+    }
+  }
+
+  public void computeSchedule(ArrayList<Activity> l_act,ArrayList<PrecedenceConstraint> l_contr) {
+    ArrayList<Activity> l_planified = new ArrayList<> ();
+    while (! l_act.isEmpty()) {
+      act = this.next(l_act,l_contr,l_planified);
+      l_planified.add(act);
+      l_act.remove(act);
+    }
+    for (Activity act : l_planified) {
+      this.edt.put(act,)
+    }
+  }
 }
