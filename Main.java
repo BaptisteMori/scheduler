@@ -42,10 +42,16 @@ class Main {
     }
     */
 
-    Activity act1 = new Activity ("Manger des Chocapic", 70);
-    Activity act2 = new Activity ("Faire une game de LOL", 45);
-    Activity act3 = new Activity ("Regarder Koh-Lanta", 120);
-    Activity act4 = new Activity ("Réviser", 5);
+    Activity act1 = new Activity ("Manger des Chocapic", 1);
+    Activity act2 = new Activity ("Faire une game de LOL", 2);
+    Activity act3 = new Activity ("Regarder Koh-Lanta", 3);
+    Activity act4 = new Activity ("Réviser", 1);
+
+    ArrayList<Activity> activities = new ArrayList<> ();
+    activities.add(act1);
+    activities.add(act2);
+    activities.add(act3);
+    activities.add(act4);
 
     PrecedenceConstraint contrainte1 = new PrecedenceConstraint (act1, act2);
     PrecedenceConstraint contrainte2 = new PrecedenceConstraint (act2, act3);
@@ -57,7 +63,7 @@ class Main {
     list_contraintes.add(contrainte3);
 
     GregorianCalendar date1 = new GregorianCalendar(2008,0,1,23,0);
-    GregorianCalendar date2 = new GregorianCalendar(2008,0,2,0,10);
+    GregorianCalendar date2 = new GregorianCalendar(2008,0,3,1,10);
     GregorianCalendar date3 = new GregorianCalendar(2010,6,24,15,0);
     GregorianCalendar date4 = new GregorianCalendar(2017,4,16,8,0);
 
@@ -70,6 +76,7 @@ class Main {
     edt.schedule(act3,date3);
     edt.schedule(act4,date4);
     */
+    edt.computeSchedule(activities,list_contraintes);
 
     if (edt.satisfies(list_contraintes)) {
       System.out.println("Test ok");

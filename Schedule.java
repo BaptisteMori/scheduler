@@ -60,23 +60,29 @@ public class Schedule {
     for (Activity x : l_act) {
       if (! l_planified.contains(x)) {
         for (PrecedenceConstraint y : l_contr) {
-          if (! x == y.sceond) {
+          if (!(x == y.second)) {
             return x;
           }
         }
       }
     }
+    return null;
   }
 
   public void computeSchedule(ArrayList<Activity> l_act,ArrayList<PrecedenceConstraint> l_contr) {
     ArrayList<Activity> l_planified = new ArrayList<> ();
+    GregorianCalendar date = new GregorianCalendar(2009,6,10,9,0);
+    Activity act;
     while (! l_act.isEmpty()) {
       act = this.next(l_act,l_contr,l_planified);
-      l_planified.add(act);
-      l_act.remove(act);
+      if (act!=null){
+        l_planified.add(act);
+        l_act.remove(act);
+      }
     }
-    for (Activity act : l_planified) {
-      this.edt.put(act,)
+    for (Activity a : l_planified) {
+      this.schedule(a,date);
+      date=new GregorianCalendar(date.get(GregorianCalendar.YEAR),date.get(GregorianCalendar.MONTH),date.get(GregorianCalendar.DAY_OF_MONTH),date.get(GregorianCalendar.HOUR_OF_DAY)+a.getDuree(),0);
     }
   }
 }
