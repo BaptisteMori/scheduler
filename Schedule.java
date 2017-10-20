@@ -51,7 +51,7 @@ public class Schedule {
     ArrayList<Activity> L = this.getSortedActivities();
     String ch = "";
     for(int i=0; i < L.size(); i++){
-      ch += L.get(i).getAction() + " à " + edt.get(L.get(i)).get(GregorianCalendar.HOUR_OF_DAY) + " h\n";
+      ch += L.get(i).getAction() + " à " + edt.get(L.get(i)).get(GregorianCalendar.HOUR_OF_DAY) + " h " + edt.get(L.get(i)).get(GregorianCalendar.MINUTE) + "\n";
     }
     return ch;
   }
@@ -82,7 +82,7 @@ public class Schedule {
     }
     for (Activity a : l_planified) {
       this.schedule(a,date);
-      date=new GregorianCalendar(date.get(GregorianCalendar.YEAR),date.get(GregorianCalendar.MONTH),date.get(GregorianCalendar.DAY_OF_MONTH),date.get(GregorianCalendar.HOUR_OF_DAY)+a.getDuree(),0);
+      date=new GregorianCalendar(date.get(GregorianCalendar.YEAR),date.get(GregorianCalendar.MONTH),date.get(GregorianCalendar.DAY_OF_MONTH),date.get(GregorianCalendar.HOUR_OF_DAY),date.get(GregorianCalendar.MINUTE)+a.getDuree());
     }
   }
 }

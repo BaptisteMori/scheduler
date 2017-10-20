@@ -42,10 +42,10 @@ class Main {
     }
     */
 
-    Activity act1 = new Activity ("Manger des Chocapic", 1);
-    Activity act2 = new Activity ("Faire une game de LOL", 2);
-    Activity act3 = new Activity ("Regarder Koh-Lanta", 3);
-    Activity act4 = new Activity ("Réviser", 1);
+    Activity act1 = new Activity ("Manger des Chocapic", 75);
+    Activity act2 = new Activity ("Faire une game de LOL", 120);
+    Activity act3 = new Activity ("Regarder Koh-Lanta", 225);
+    Activity act4 = new Activity ("Réviser", 60);
 
     ArrayList<Activity> activities = new ArrayList<> ();
     activities.add(act1);
@@ -54,7 +54,7 @@ class Main {
     activities.add(act4);
 
     PrecedenceConstraint contrainte1 = new PrecedenceConstraint (act1, act2);
-    PrecedenceConstraint contrainte2 = new PrecedenceConstraint (act2, act3);
+    PrecedenceConstraint contrainte2 = new PrecedenceConstraint (act2, act1);
     PrecedenceConstraint contrainte3 = new PrecedenceConstraint (act3, act4);
 
     ArrayList<PrecedenceConstraint> list_contraintes = new ArrayList<> ();
