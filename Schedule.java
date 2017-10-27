@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.GregorianCalendar;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 public class Schedule {
 
@@ -66,24 +67,25 @@ public class Schedule {
         }
       }
     }
-    return null;
+    throw new NoSuchElementException("Pas de possibilité");
   }
 
-  public void computeSchedule(ArrayList<Activity> l_act,ArrayList<PrecedenceConstraint> l_contr) {
-    
-    ArrayList<Activity> l_planified = new ArrayList<> ();
-    GregorianCalendar date = new GregorianCalendar(2009,6,10,9,0);
-    Activity act;
-    while (! l_act.isEmpty()) {
-      act = this.next(l_act,l_contr,l_planified);
-      if (act!=null){
-        l_planified.add(act);
-        l_act.remove(act);
+  public void computeSchedule(ArrayList<Activity> l_act,ArrayList<PrecedenceConstraint> l_contr) throws NoSuchElementException {
+      ArrayList<Activity> l_planified = new ArrayList<> ();
+      GregorianCalendar date = new GregorianCalendar(2009,6,10,9,0);
+      Activity act;
+      while (! l_act.isEmpty()) {
+        try {
+          act = this.next(l_act,l_contr,l_planified);
+          l_planified.add(act);
+          l_act.remove(act);
+        } catch (NoSuchElementException e) {
+          System.out.println("error");
+        }
       }
-    }
-    for (Activity a : l_planified) {
-      this.schedule(a,date);
-      date=new GregorianCalendar(date.get(GregorianCalendar.YEAR),date.get(GregorianCalendar.MONTH),date.get(GregorianCalendar.DAY_OF_MONTH),date.get(GregorianCalendar.HOUR_OF_DAY),date.get(GregorianCalendar.MINUTE)+a.getDuree());
-    }
+      for (Activity a : l_planified) {
+        this.schedule(a,date);
+        date=new GregorianCalendar(date.get(GregorianCalendar.YEAR),date.get(GregorianCalendar.MONTH),date.get(GregorianCalendar.DAY_OF_MONTH),date.get(GregorianCalendar.HOUR_OF_DAY),date.get(GregorianCalendar.MINUTE)+a.getDuree());
+      }
   }
 }
