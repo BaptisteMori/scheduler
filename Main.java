@@ -10,6 +10,8 @@ class Main {
 
   public static void main (String[] args) {
 
+    System.out.println("______________________________\n");
+
     /*
     Activity act1 = new Activity ("Manger des Chocapic", 70);
     Activity act2 = new Activity ("Faire une game de LOL", 45);
@@ -54,7 +56,7 @@ class Main {
     activities.add(act4);
 
     PrecedenceConstraint contrainte1 = new PrecedenceConstraint (act1, act2);
-    PrecedenceConstraint contrainte2 = new PrecedenceConstraint (act2, act1);
+    PrecedenceConstraint contrainte2 = new PrecedenceConstraint (act2, act3);
     PrecedenceConstraint contrainte3 = new PrecedenceConstraint (act3, act4);
 
     ArrayList<PrecedenceConstraint> list_contraintes = new ArrayList<> ();
@@ -77,6 +79,8 @@ class Main {
     edt.schedule(act4,date4);
     */
     edt.computeSchedule(activities,list_contraintes);
-    System.out.println(edt.toString());
+    System.out.print(edt.toString());
+
+    System.out.println("______________________________\n");
   }
 }

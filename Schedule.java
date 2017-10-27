@@ -60,10 +60,15 @@ public class Schedule {
   private Activity next(ArrayList<Activity> l_act, ArrayList<PrecedenceConstraint> l_contr,ArrayList<Activity> l_planified) {
     for (Activity x : l_act) {
       if (! l_planified.contains(x)) {
+        boolean test_act_est_secondaire = true;
         for (PrecedenceConstraint y : l_contr) {
-          if (!(x == y.second)) {
-            return x;
+          if (x == y.second && !l_planified.contains(y.first)) {
+            test_act_est_secondaire = false;
+            break;
           }
+        }
+        if (test_act_est_secondaire) {
+          return x;
         }
       }
     }
@@ -71,21 +76,21 @@ public class Schedule {
   }
 
   public void computeSchedule(ArrayList<Activity> l_act,ArrayList<PrecedenceConstraint> l_contr) throws NoSuchElementException {
+    try {
       ArrayList<Activity> l_planified = new ArrayList<> ();
       GregorianCalendar date = new GregorianCalendar(2009,6,10,9,0);
       Activity act;
       while (! l_act.isEmpty()) {
-        try {
-          act = this.next(l_act,l_contr,l_planified);
-          l_planified.add(act);
-          l_act.remove(act);
-        } catch (NoSuchElementException e) {
-          System.out.println("error");
-        }
+        act = this.next(l_act,l_contr,l_planified);
+        l_planified.add(act);
+        l_act.remove(act);
       }
       for (Activity a : l_planified) {
         this.schedule(a,date);
         date=new GregorianCalendar(date.get(GregorianCalendar.YEAR),date.get(GregorianCalendar.MONTH),date.get(GregorianCalendar.DAY_OF_MONTH),date.get(GregorianCalendar.HOUR_OF_DAY),date.get(GregorianCalendar.MINUTE)+a.getDuree());
       }
+    } catch (NoSuchElementException e) {
+      System.out.println("Error");
+    }
   }
 }
