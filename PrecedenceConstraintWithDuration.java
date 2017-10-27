@@ -2,18 +2,42 @@ package edt_java;
 
 import java.util.GregorianCalendar;
 
+/**
+	* Fille de PrecedenceConstraint. Cette classe prend également en compte
+	* un intervalle entre la fin de la première activité et le début de la seconde.
+	* @see PrecedenceConstraint
+*/
 class PrecedenceConstraintWithDuration extends PrecedenceConstraint {
 
   private int duree_min;
   private int duree_max;
 
-
+/**
+	* Constructeur de la classe.
+	* @param first
+	* Activité devant être planifiée en premier (variable héritée).
+	* @param second
+	* Activité devant être planifiée en second (variable héritée).
+	* @param duree_min
+	* Longueur minimale de l'intervalle, exprimée en minutes.
+	* @param duree_max
+	* Longueur maximale de l'intervalle, exprimée en minutes.
+*/
   public PrecedenceConstraintWithDuration(Activity first, Activity second, int duree_min, int duree_max){
     super(first,second);
     this.duree_min = duree_min;
     this.duree_max = duree_max;
   }
 
+/**
+	* Surcharge de la méthode isSatisfied de la classe mère.
+	* @param date1
+	* Date de début de l'activité <b>first</b>.
+	* @param date2
+	* Date de début de l'activité <b>second</b>.
+	* @return Le résultat du test : <i>true</i> si les deux activités ne se chevauchent pas,
+	* <i>false</i> dans le cas contraire.
+*/
   @Override
   public boolean isSatisfied(GregorianCalendar date1, GregorianCalendar date2){
 
