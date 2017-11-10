@@ -4,10 +4,9 @@ import java.util.HashMap;
 import java.util.GregorianCalendar;
 import java.util.Map;
 
-public abstract class BinaryConstraint {
+public abstract class BinaryConstraint implements Constraint {
 
   protected Activity first;
-
   protected Activity second;
 
 	public BinaryConstraint(Activity first, Activity second) {

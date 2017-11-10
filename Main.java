@@ -94,19 +94,31 @@ class Main {
     activities.add(act3);
     activities.add(act4);
 
-    MeetConstraint contains1 = new MeetConstraint(act1,act2);
+    PrecedenceConstraint contrainte1 = new PrecedenceConstraint (act1, act2);
+    PrecedenceConstraintWithDuration contrainte2 = new PrecedenceConstraintWithDuration (act2, act3, 10, 3600*24*365*12);
+    MeetConstraint contrainte3 = new MeetConstraint (act3, act4);
 
     GregorianCalendar date1 = new GregorianCalendar(2008,0,1,22,0);
     GregorianCalendar date2 = new GregorianCalendar(2008,0,1,23,10);
     GregorianCalendar date3 = new GregorianCalendar(2017,4,16,4,0);
     GregorianCalendar date4 = new GregorianCalendar(2017,4,16,8,0);
 
+    ArrayList<BinaryConstraint> list_contraintes = new ArrayList<> ();
+    list_contraintes.add(contrainte1);
+    list_contraintes.add(contrainte2);
+    list_contraintes.add(contrainte3);
+
     // test de isSatisfied de MeetConstraint //
-    //System.out.println(contains1.isSatisfied(date1,date2));
+    //System.out.println(contrainte1.isSatisfied(date1,date2));
 
+    Schedule edt = new Schedule();
 
-
-
+    edt.computeSchedule(activities,list_contraintes);
+    if (contrainte1.isSatisfied(date1, date2) && contrainte2.isSatisfied(date2,date3) && contrainte3.isSatisfied(date3,date4)) {
+      System.out.print(edt.toString());
+    } else {
+      System.out.println("Nope");
+    }
 
     System.out.println("______________________________\n");
   }
