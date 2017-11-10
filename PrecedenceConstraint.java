@@ -6,10 +6,7 @@ import java.util.GregorianCalendar;
 	* Représente une contrainte de précédence entre deux créneaux horaires de la classe <b>Activity</b>.
 	* @see Activity
 */
-public class PrecedenceConstraint {
-
-  Activity first;
-  Activity second;
+public class PrecedenceConstraint extends BinaryConstraint {
 
 /**
 	* Constructeur de la classe.
@@ -19,8 +16,7 @@ public class PrecedenceConstraint {
 	* Activité devant être planifiée en second.
 */
   public PrecedenceConstraint(Activity first, Activity second){
-    this.first = first;
-    this.second = second;
+    super(first,second);
   }
 
 /**

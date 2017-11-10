@@ -7,7 +7,7 @@ import java.util.GregorianCalendar;
 	* un intervalle entre la fin de la première activité et le début de la seconde.
 	* @see PrecedenceConstraint
 */
-class PrecedenceConstraintWithDuration extends PrecedenceConstraint {
+public class PrecedenceConstraintWithDuration extends PrecedenceConstraint {
 
   private int duree_min;
   private int duree_max;

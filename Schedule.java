@@ -25,6 +25,10 @@ public class Schedule {
     this.edt = new HashMap<> ();
   }
 
+  public HashMap<Activity, GregorianCalendar> getEdt(){
+    return this.edt;
+  }
+
 /**
 	* Insère une paire activité/date de début dans l'emploi du temps.
 	* @param act

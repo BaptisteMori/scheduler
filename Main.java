@@ -44,9 +44,10 @@ class Main {
     }
     */
 
+    /*
     Activity act1 = new Activity ("Manger des Chocapic", 75);
     Activity act2 = new Activity ("Faire une game de LOL", 120);
-    Activity act3 = new Activity ("Regarder Koh-Lanta", 225);
+    Activity act3 = new Activity ("Regarder Koh-Lanta", 240);
     Activity act4 = new Activity ("Réviser", 60);
 
     ArrayList<Activity> activities = new ArrayList<> ();
@@ -66,20 +67,46 @@ class Main {
 
     GregorianCalendar date1 = new GregorianCalendar(2008,0,1,23,0);
     GregorianCalendar date2 = new GregorianCalendar(2008,0,3,1,10);
-    GregorianCalendar date3 = new GregorianCalendar(2010,6,24,15,0);
+    GregorianCalendar date3 = new GregorianCalendar(2017,4,16,4,0);
     GregorianCalendar date4 = new GregorianCalendar(2017,4,16,8,0);
 
     //PrecedenceConstraintWithDuration contrainte1 = new PrecedenceConstraintWithDuration(act1,act2,40,50);
 
     Schedule edt = new Schedule();
-    /*
-    edt.schedule(act1,date1);
-    edt.schedule(act2,date2);
-    edt.schedule(act3,date3);
-    edt.schedule(act4,date4);
-    */
+
+    //edt.schedule(act1,date1);
+    //edt.schedule(act2,date2);
+    //edt.schedule(act3,date3);
+    //edt.schedule(act4,date4);
+
     edt.computeSchedule(activities,list_contraintes);
     System.out.print(edt.toString());
+    */
+
+    Activity act1 = new Activity ("Manger des Chocapic", 60);
+    Activity act2 = new Activity ("Faire une game de LOL", 120);
+    Activity act3 = new Activity ("Regarder Koh-Lanta", 240);
+    Activity act4 = new Activity ("Réviser", 60);
+
+    ArrayList<Activity> activities = new ArrayList<> ();
+    activities.add(act1);
+    activities.add(act2);
+    activities.add(act3);
+    activities.add(act4);
+
+    MeetConstraint contains1 = new MeetConstraint(act1,act2);
+
+    GregorianCalendar date1 = new GregorianCalendar(2008,0,1,22,0);
+    GregorianCalendar date2 = new GregorianCalendar(2008,0,1,23,10);
+    GregorianCalendar date3 = new GregorianCalendar(2017,4,16,4,0);
+    GregorianCalendar date4 = new GregorianCalendar(2017,4,16,8,0);
+
+    // test de isSatisfied de MeetConstraint //
+    //System.out.println(contains1.isSatisfied(date1,date2));
+
+
+
+
 
     System.out.println("______________________________\n");
   }
