@@ -1,5 +1,9 @@
 package edt_java;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.GregorianCalendar;
+import java.util.Map;
 
 public class MaxSpanConstraint implements Constraint {
 
@@ -13,9 +17,9 @@ public class MaxSpanConstraint implements Constraint {
     Schedule edt_temp = new Schedule ();
     edt_temp.computeSchedule(this.list_act,list_contraintes);
     this.list_act = edt_temp.getSortedActivities();
-    first_act = this.list_act.get(0);
-    last_act = this.list_act.get(this.list_act.size() - 1);
-    edt = edt.getEdt();
-    return edt.
+    Activity first_act = this.list_act.get(0);
+    Activity last_act = this.list_act.get(this.list_act.size() - 1);
+    HashMap<Activity, GregorianCalendar> edt_temp_hashmap = edt_temp.getEdt();
+    return edt_temp_hashmap.get(Activity last_act);
   }
 }
