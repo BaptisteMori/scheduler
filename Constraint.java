@@ -2,5 +2,5 @@ package edt_java;
 
 public interface Constraint {
 
-  public boolean isSatisfied(Schedule edt);
+  public abstract boolean isSatisfied(Schedule edt);
 }

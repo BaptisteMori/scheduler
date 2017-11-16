@@ -119,7 +119,8 @@ class Main {
     } else {
       System.out.println("Nope");
     }
-
+    MaxSpanConstraint test = new MaxSpanConstraint(activities);
+    boolean test2 = test.timeSatisfied(edt,list_contraintes,10);
     System.out.println("______________________________\n");
   }
 }
