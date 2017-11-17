@@ -126,7 +126,7 @@ class Main {
     activities1.add(act3);
     activities1.add(act4);
 
-    MaxSpanConstraint test = new MaxSpanConstraint(activities1,9*60);
+    MaxSpanConstraint test = new MaxSpanConstraint(activities1,60*9);
     boolean test2 = test.isSatisfied(edt);
     System.out.println(test2);
     System.out.println("______________________________\n");
