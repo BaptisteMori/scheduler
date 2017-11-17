@@ -80,10 +80,6 @@ public class Schedule {
     return Lfinal;
   }
 
-  public ArrayList<Activity> getActivitiesSorted() {
-    return getActivitiesSorted();
-  }
-
 /**
 	* Crée une version affichable de l'emploi du temps.
 	* @return Une chaîne de caractère mise en forme permettant d'afficher en console l'emploi du temps.

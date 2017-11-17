@@ -98,10 +98,10 @@ class Main {
     PrecedenceConstraintWithDuration contrainte2 = new PrecedenceConstraintWithDuration (act2, act3, 10, 3600*24*365*12);
     MeetConstraint contrainte3 = new MeetConstraint (act3, act4);
 
-    GregorianCalendar date1 = new GregorianCalendar(2008,0,1,22,0);
-    GregorianCalendar date2 = new GregorianCalendar(2008,0,1,23,10);
-    GregorianCalendar date3 = new GregorianCalendar(2017,4,16,4,0);
-    GregorianCalendar date4 = new GregorianCalendar(2017,4,16,8,0);
+    GregorianCalendar date1 = new GregorianCalendar(2017,4,16,5,0);
+    GregorianCalendar date2 = new GregorianCalendar(2017,4,16,7,10);
+    GregorianCalendar date3 = new GregorianCalendar(2017,4,16,10,0);
+    GregorianCalendar date4 = new GregorianCalendar(2017,4,16,14,0);
 
     ArrayList<BinaryConstraint> list_contraintes = new ArrayList<> ();
     list_contraintes.add(contrainte1);
@@ -119,8 +119,16 @@ class Main {
     } else {
       System.out.println("Nope");
     }
-    MaxSpanConstraint test = new MaxSpanConstraint(activities);
-    boolean test2 = test.timeSatisfied(edt,list_contraintes,10);
+
+    ArrayList<Activity> activities1 = new ArrayList<> ();
+    activities1.add(act1);
+    activities1.add(act2);
+    activities1.add(act3);
+    activities1.add(act4);
+
+    MaxSpanConstraint test = new MaxSpanConstraint(activities1,9*60);
+    boolean test2 = test.isSatisfied(edt);
+    System.out.println(test2);
     System.out.println("______________________________\n");
   }
 }

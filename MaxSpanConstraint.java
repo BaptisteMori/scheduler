@@ -5,23 +5,36 @@ import java.util.HashMap;
 import java.util.GregorianCalendar;
 import java.util.Map;
 
-public class MaxSpanConstraint {
+public class MaxSpanConstraint implements Constraint {
 
   private ArrayList<Activity> list_act;
+  private int minutes;
 
-  public MaxSpanConstraint(ArrayList<Activity> list_act){
+  public MaxSpanConstraint(ArrayList<Activity> list_act, int minutes){
     this.list_act = list_act;
+    this.minutes = minutes;
   }
 
-  public boolean timeSatisfied(Schedule edt, ArrayList<BinaryConstraint> list_contraintes, int minutes){
-    Schedule edt_temp = new Schedule ();
-    edt_temp.computeSchedule(this.list_act,list_contraintes);
-    this.list_act = edt_temp.getActivitiesSorted();
+  public boolean isSatisfied(Schedule edt) {
+    int dure = 0;
+
     Activity first_act = this.list_act.get(0);
-    Activity last_act = this.list_act.get(this.list_act.size() - 1);
-    HashMap<Activity, GregorianCalendar> edt_temp_hashmap = edt_temp.getEdt();
-    GregorianCalendar time1 = edt_temp_hashmap.get(last_act);
-    System.out.println(time1.get(GregorianCalendar.HOUR_OF_DAY));
-    return true;
+    Activity last_act = this.list_act.get(0);
+
+    for (Activity act : this.list_act) {
+      if (edt.get(act).compareTo(edt.get(act)) < 0) {
+        first_act = act;
+      }
+      /*
+      if (act.values()[0].compareTo(last_act.values()[0]) > 0) {
+        last_act = act;
+      }*/
+    }
+
+    if (dure >= this.minutes) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }
