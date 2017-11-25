@@ -16,6 +16,7 @@ public abstract class BinaryConstraint implements Constraint {
 
   public abstract boolean isSatisfied(GregorianCalendar date1,GregorianCalendar date2);
 
+  @Override
   public boolean isSatisfied(Schedule edt){
     HashMap<Activity, GregorianCalendar> emploiDT = edt.getEdt();
     GregorianCalendar date1 = emploiDT.get(this.first);

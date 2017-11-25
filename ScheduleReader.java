@@ -11,7 +11,7 @@ public class ScheduleReader {
 
 	public ScheduleReader() {
 	}
-
+	
 	public Map<String, Activity> readActivities(String filename) throws IOException {
 		BufferedReader fileReader = new BufferedReader(new FileReader(filename));
 		IdStringStringReader activityReader = new IdStringStringReader(fileReader, "=", "_lasting_");
