@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.GregorianCalendar;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Collection;
+
 
 /**
 	* Crée un emploi du temps à partir d'activités et de contraintes données.
@@ -47,15 +49,24 @@ public class Schedule {
 	* @return Le résultat du test : <i>true</i> si tout est satisfait,
 	* <i>false</i> dans le cas contraire.
 */
-  public boolean satisfies(ArrayList<PrecedenceConstraint> contraintes){
-    for(int i = 0; i < contraintes.size(); i++){
-      if (!contraintes.get(i).isSatisfied(edt.get(contraintes.get(i).first),edt.get(contraintes.get(i).second))) {
+  public boolean satisfies(Collection<Constraint> contraintes){
+    for(Constraint contr : contraintes){
+      if (!contr.isSatisfied(this)) {
         return false;
       }
     }
     return true;
   }
-
+/*
+  public boolean satisfies (Collection<PrecedenceConstraint> toutesContraintes) {
+      for (PrecedenceConstraint contrainte: toutesContraintes) {
+        if (!contrainte.isSatisfied(this.edt.get(contrainte.first), this.edt.get(contrainte.second))) {
+          return false;
+        }
+      }
+      return true;
+    }
+*/
 /**
 	* Trie les activités de l'emploi du temps par ordre chronologique.
 	* @return La liste des activités triée par ordre chronologique.
@@ -104,7 +115,7 @@ public class Schedule {
 	@return L'activité suivante dans l'ordre de planification.
 	@throws NoSuchElementException Si il n'y a pas d'activité remplissant les contraintes à retourner.
 */
-  private Activity next(ArrayList<Activity> l_act, ArrayList<BinaryConstraint> l_contr,ArrayList<Activity> l_planified) {
+  private Activity next(ArrayList<Activity> l_act, Collection<BinaryConstraint> l_contr,ArrayList<Activity> l_planified) {
     for (Activity x : l_act) {
       if (! l_planified.contains(x)) {
         boolean test_act_est_secondaire = true;
@@ -129,7 +140,7 @@ public class Schedule {
 	* @param l_contr
 	* Liste des contraintes à prendre en compte.
 */
-  public void computeSchedule(ArrayList<Activity> l_act,ArrayList<BinaryConstraint> l_contr) throws NoSuchElementException {
+  public void computeSchedule(ArrayList<Activity> l_act,Collection<BinaryConstraint> l_contr) throws NoSuchElementException {
     try {
       ArrayList<Activity> l_planified = new ArrayList<> ();
       GregorianCalendar date = new GregorianCalendar(2009,6,10,9,0);

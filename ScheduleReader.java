@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ScheduleReader {
 
@@ -36,13 +37,53 @@ public class ScheduleReader {
 		BufferedReader fileReader = new BufferedReader(new FileReader(fileConstraintsName));
 		IdStringReader ConstraintReader = new IdStringReader(fileReader, "_before_");
 		ArrayList<PrecedenceConstraint> listePrecedence = new ArrayList<> ();
-		for (Map.Entry<String,String> elt : ConstraintReader.readAll().entrySet()) {
-			String id1 = elt.getKey();
-			System.out.println(id1);
-			String id2 = elt.getValue();
-			PrecedenceConstraint contrainte = new PrecedenceConstraint(activities.get(id1),activities.get(id2));
+		OrderedPair<String,String> line = ConstraintReader.read();
+		while (line != null) {
+			Activity act1 = activities.get(line.getFirst());
+			Activity act2 = activities.get(line.getSecond());
+			PrecedenceConstraint contrainte = new PrecedenceConstraint(act1,act2);
 			listePrecedence.add(contrainte);
-    }
+			line = ConstraintReader.read();
+		}
+		System.out.println(listePrecedence);
 		return listePrecedence;
+	}
+
+	public ArrayList<MeetConstraint> buildMeetingCollection (Map<String,Activity> activities, String fileConstraintsName) throws IOException {
+		BufferedReader fileReader = new BufferedReader(new FileReader(fileConstraintsName));
+		IdStringReader ConstraintReader = new IdStringReader(fileReader, "_meets_");
+		ArrayList<MeetConstraint> listeMeeting = new ArrayList<> ();
+		OrderedPair<String,String> line = ConstraintReader.read();
+		while (line != null) {
+			Activity act1 = activities.get(line.getFirst());
+			Activity act2 = activities.get(line.getSecond());
+			MeetConstraint contrainte = new MeetConstraint(act1,act2);
+			listeMeeting.add(contrainte);
+			line = ConstraintReader.read();
+		}
+		System.out.println(listeMeeting);
+		return listeMeeting;
+	}
+
+	public ArrayList<MaxSpanConstraint> buildMaxSpanCollection (Map<String,Activity> activities, String fileConstraintsName) throws IOException {
+		BufferedReader fileReader = new BufferedReader(new FileReader(fileConstraintsName));
+		IdStringReader ConstraintReader = new IdStringReader(fileReader, "_within_");
+		ArrayList<MaxSpanConstraint> listeMaxSpan = new ArrayList<> ();
+		OrderedPair<String,String> line = ConstraintReader.read();
+		while (line != null) {
+			String chartmp=line.getFirst();
+			ArrayList<String> listetmp = new ArrayList<String>(Arrays.asList(chartmp.split(","))) ;
+			ArrayList<Activity> list_act = new ArrayList<> ();
+			for(String x : listetmp){
+				list_act.add(activities.get(x));
+			}
+			System.out.println(line.getSecond());
+			int duree = Integer.parseInt(line.getSecond());
+			MaxSpanConstraint contrainte = new MaxSpanConstraint(list_act,duree);
+			listeMaxSpan.add(contrainte);
+			line = ConstraintReader.read();
+		}
+		System.out.println(listeMaxSpan);
+		return listeMaxSpan;
 	}
 }
