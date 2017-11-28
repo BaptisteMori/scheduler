@@ -12,7 +12,7 @@ class Main {
 
     System.out.println("______________________________\n");
 
-    if (!(args.length==0)) {
+    if (args.length==2) {
       ScheduleReader read = new ScheduleReader();
       Map<String,Activity> activities = read.readActivities(args[0]);
 
@@ -27,9 +27,9 @@ class Main {
         System.out.println("Erreur de fichier");
       }
     } else {
-      System.out.println("Aucuns arguments n'a été donnés");
+      System.out.println("Aucuns ou pas assez d'arguments n'ont été donnés");
     }
-    
+
     /*
     // MeetConstraint
     ScheduleReader read = new ScheduleReader();
