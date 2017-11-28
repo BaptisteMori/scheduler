@@ -11,7 +11,7 @@ class Main {
   public static void main (String[] args) throws IOException {
 
     System.out.println("______________________________\n");
-    /*
+
     if (!(args.length==0)) {
       ScheduleReader read = new ScheduleReader();
       Map<String,Activity> activities = read.readActivities(args[0]);
@@ -29,7 +29,7 @@ class Main {
     } else {
       System.out.println("Aucuns arguments n'a été donnés");
     }
-    */
+    
     /*
     // MeetConstraint
     ScheduleReader read = new ScheduleReader();
@@ -40,7 +40,7 @@ class Main {
     }
     */
 
-
+    /*
     //MaxSpanConstraint
     ScheduleReader read = new ScheduleReader();
     Map<String,Activity> activities = read.readActivities(args[0]);
@@ -58,7 +58,7 @@ class Main {
       System.out.println("Temps total maximum : " + maxSpan.getTimeTotal());
       System.out.println("Contrainte satisfaite : " + (somme <= maxSpan.getTimeTotal()) + "\n" + "\n" + "--------" + "\n");
     }
-
+    */
 
     System.out.println("______________________________\n");
   }
