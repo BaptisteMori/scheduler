@@ -46,6 +46,7 @@ public class ScheduleReader {
 		IdStringReader ConstraintReader = new IdStringReader(fileReader, "_before_");
 		ArrayList<PrecedenceConstraint> listePrecedence = new ArrayList<> ();
 		OrderedPair<String,String> line = ConstraintReader.read();
+
 		while (line != null) {
 			Activity act1 = activities.get(line.getFirst());
 			Activity act2 = activities.get(line.getSecond());
@@ -53,6 +54,7 @@ public class ScheduleReader {
 			listePrecedence.add(contrainte);
 			line = ConstraintReader.read();
 		}
+		
 		return listePrecedence;
 	}
 
@@ -61,6 +63,7 @@ public class ScheduleReader {
 		IdStringReader ConstraintReader = new IdStringReader(fileReader, "_meets_");
 		ArrayList<MeetConstraint> listeMeeting = new ArrayList<> ();
 		OrderedPair<String,String> line = ConstraintReader.read();
+
 		while (line != null) {
 			Activity act1 = activities.get(line.getFirst());
 			Activity act2 = activities.get(line.getSecond());
@@ -68,6 +71,7 @@ public class ScheduleReader {
 			listeMeeting.add(contrainte);
 			line = ConstraintReader.read();
 		}
+
 		return listeMeeting;
 	}
 
@@ -76,14 +80,16 @@ public class ScheduleReader {
 		IdStringReader ConstraintReader = new IdStringReader(fileReader, "_within_");
 		ArrayList<MaxSpanConstraint> listeMaxSpan = new ArrayList<> ();
 		OrderedPair<String,String> line = ConstraintReader.read();
+
 		while (line != null) {
 			String chartmp=line.getFirst();
-			ArrayList<String> listetmp = new ArrayList<String>(Arrays.asList(chartmp.split(","))) ;
+			ArrayList<String> listetmp = new ArrayList<String>(Arrays.asList(chartmp.split(", ")));
 			ArrayList<Activity> list_act = new ArrayList<> ();
+
 			for(String x : listetmp){
 				list_act.add(activities.get(x));
 			}
-			System.out.println(line.getSecond());
+
 			int duree = Integer.parseInt(line.getSecond());
 			MaxSpanConstraint contrainte = new MaxSpanConstraint(list_act,duree);
 			listeMaxSpan.add(contrainte);

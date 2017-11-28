@@ -15,6 +15,14 @@ public class MaxSpanConstraint implements Constraint {
     this.minutes = minutes;
   }
 
+  public ArrayList<Activity> getListeActivities () {
+    return this.list_act;
+  }
+
+  public int getTimeTotal () {
+    return this.minutes;
+  }
+
   @Override
   public boolean isSatisfied(Schedule edt) {
 

@@ -81,7 +81,7 @@ public class Schedule {
     while (Ltemp.size() != 0) {
       min = 0;
       for (int i = 0; i < Ltemp.size(); i++) {
-        if (edt.get(Ltemp.get(i)).compareTo(edt.get(Ltemp.get(min))) < 0) {
+        if (edt.get(Ltemp.get(i)).compareTo(edt.get(Ltemp.get(min))) <= 0) {
           min = i;
         }
       }
