@@ -32,6 +32,14 @@ public class ScheduleReader {
 		}
 	}
 
+	public ArrayList<Activity> getActivities(Map<String, Activity> map) {
+		ArrayList<Activity> activities = new ArrayList<> ();
+		for (Map.Entry<String, Activity> elt : map.entrySet()) {
+			activities.add(elt.getValue());
+		}
+		return activities;
+	}
+
 
 	public ArrayList<PrecedenceConstraint> buildPrecedenceCollection (Map<String,Activity> activities, String fileConstraintsName) throws IOException {
 		BufferedReader fileReader = new BufferedReader(new FileReader(fileConstraintsName));
@@ -45,7 +53,6 @@ public class ScheduleReader {
 			listePrecedence.add(contrainte);
 			line = ConstraintReader.read();
 		}
-		System.out.println(listePrecedence);
 		return listePrecedence;
 	}
 
@@ -61,7 +68,6 @@ public class ScheduleReader {
 			listeMeeting.add(contrainte);
 			line = ConstraintReader.read();
 		}
-		System.out.println(listeMeeting);
 		return listeMeeting;
 	}
 
@@ -83,7 +89,6 @@ public class ScheduleReader {
 			listeMaxSpan.add(contrainte);
 			line = ConstraintReader.read();
 		}
-		System.out.println(listeMaxSpan);
 		return listeMaxSpan;
 	}
 }
