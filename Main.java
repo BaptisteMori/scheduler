@@ -27,7 +27,7 @@ class Main {
         System.out.println("Erreur de fichier");
       }
     } else {
-      System.out.println("Aucuns ou pas assez d'arguments n'ont été donnés");
+      System.out.println("Le nombre d'arguments donnés n'est pas correct, besoin de 2 arguments");
     }
 
     /*
