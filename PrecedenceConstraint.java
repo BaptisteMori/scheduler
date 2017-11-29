@@ -19,6 +19,16 @@ public class PrecedenceConstraint extends BinaryConstraint {
     super(first,second);
   }
 
+  @Override
+  public Activity getFirst() {
+    return this.first;
+  }
+
+  @Override
+  public Activity getSecond() {
+    return this.second;
+  }
+
 /**
 	* Teste si la contrainte peut être respectée, c'est-à-dire si les activités se chevauchent.
 	* @param date1

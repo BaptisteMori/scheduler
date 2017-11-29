@@ -50,7 +50,7 @@ public class MaxSpanConstraint implements Constraint {
 
     double duree = time2.getTimeInMillis() - time1.getTimeInMillis();
     duree = duree/60000;
-    System.out.println(duree);
+
 
     if (duree > this.minutes) {
       return false;

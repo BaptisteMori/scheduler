@@ -81,7 +81,7 @@ public class Schedule {
     while (Ltemp.size() != 0) {
       min = 0;
       for (int i = 0; i < Ltemp.size(); i++) {
-        if (edt.get(Ltemp.get(i)).compareTo(edt.get(Ltemp.get(min))) <= 0) {
+        if (edt.get(Ltemp.get(i)).compareTo(edt.get(Ltemp.get(min))) < 0) {
           min = i;
         }
       }
@@ -115,12 +115,13 @@ public class Schedule {
 	@return L'activité suivante dans l'ordre de planification.
 	@throws NoSuchElementException Si il n'y a pas d'activité remplissant les contraintes à retourner.
 */
-  private Activity next(ArrayList<Activity> l_act, Collection<PrecedenceConstraint> l_contr,ArrayList<Activity> l_planified) {
+  private Activity next(ArrayList<Activity> l_act, Collection<BinaryConstraint> l_contr,ArrayList<Activity> l_planified) {
     for (Activity x : l_act) {
       if (! l_planified.contains(x)) {
         boolean test_act_est_secondaire = true;
         for (BinaryConstraint y : l_contr) {
-          if (x == y.second && !l_planified.contains(y.first)) {
+
+          if (x == y.getSecond() && !l_planified.contains(y.getFirst())) {
             test_act_est_secondaire = false;
             break;
           }
@@ -140,7 +141,7 @@ public class Schedule {
 	* @param l_contr
 	* Liste des contraintes à prendre en compte.
 */
-  public void computeSchedule(ArrayList<Activity> l_act,Collection<PrecedenceConstraint> l_contr) throws NoSuchElementException {
+  public void computeSchedule(ArrayList<Activity> l_act,Collection<BinaryConstraint> l_contr) throws NoSuchElementException {
     try {
       ArrayList<Activity> l_planified = new ArrayList<> ();
       GregorianCalendar date = new GregorianCalendar(2009,6,10,9,0);

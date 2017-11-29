@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 
 public class ScheduleReader {
 
@@ -41,38 +42,26 @@ public class ScheduleReader {
 	}
 
 
-	public ArrayList<PrecedenceConstraint> buildPrecedenceCollection (Map<String,Activity> activities, String fileConstraintsName) throws IOException {
+	public Collection<BinaryConstraint> buildPreceMeetCollection (Map<String,Activity> activities, String fileConstraintsName, String separator) throws IOException {
 		BufferedReader fileReader = new BufferedReader(new FileReader(fileConstraintsName));
-		IdStringReader ConstraintReader = new IdStringReader(fileReader, "_before_");
-		ArrayList<PrecedenceConstraint> listePrecedence = new ArrayList<> ();
-		OrderedPair<String,String> line = ConstraintReader.read();
-
+		IdStringReader constraintReader = new IdStringReader(fileReader, separator);
+		Collection<BinaryConstraint> listePrecedence = new ArrayList<> ();
+		OrderedPair<String,String> line = constraintReader.read();
 		while (line != null) {
 			Activity act1 = activities.get(line.getFirst());
 			Activity act2 = activities.get(line.getSecond());
-			PrecedenceConstraint contrainte = new PrecedenceConstraint(act1,act2);
-			listePrecedence.add(contrainte);
-			line = ConstraintReader.read();
+			if (separator=="_before_") {
+				PrecedenceConstraint contrainte = new PrecedenceConstraint(act1,act2);
+				listePrecedence.add(contrainte);
+			}
+			else if (separator=="_meets_") {
+				MeetConstraint contrainte = new MeetConstraint(act1,act2);
+				listePrecedence.add(contrainte);
+			}
+			line = constraintReader.read();
 		}
-		
+
 		return listePrecedence;
-	}
-
-	public ArrayList<MeetConstraint> buildMeetingCollection (Map<String,Activity> activities, String fileConstraintsName) throws IOException {
-		BufferedReader fileReader = new BufferedReader(new FileReader(fileConstraintsName));
-		IdStringReader ConstraintReader = new IdStringReader(fileReader, "_meets_");
-		ArrayList<MeetConstraint> listeMeeting = new ArrayList<> ();
-		OrderedPair<String,String> line = ConstraintReader.read();
-
-		while (line != null) {
-			Activity act1 = activities.get(line.getFirst());
-			Activity act2 = activities.get(line.getSecond());
-			MeetConstraint contrainte = new MeetConstraint(act1,act2);
-			listeMeeting.add(contrainte);
-			line = ConstraintReader.read();
-		}
-
-		return listeMeeting;
 	}
 
 	public ArrayList<MaxSpanConstraint> buildMaxSpanCollection (Map<String,Activity> activities, String fileConstraintsName) throws IOException {

@@ -14,6 +14,10 @@ public abstract class BinaryConstraint implements Constraint {
     this.second = second;
 	}
 
+  public abstract Activity getFirst();
+
+  public abstract Activity getSecond();
+
   public abstract boolean isSatisfied(GregorianCalendar date1,GregorianCalendar date2);
 
   @Override
@@ -23,4 +27,5 @@ public abstract class BinaryConstraint implements Constraint {
     GregorianCalendar date2 = emploiDT.get(this.second);
     return isSatisfied(date1,date2);
   }
+
 }
