@@ -1,4 +1,3 @@
-
 package edt_java;
 
 import java.util.ArrayList;
@@ -7,7 +6,6 @@ import java.util.GregorianCalendar;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Collection;
-
 
 /**
 	* Crée un emploi du temps à partir d'activités et de contraintes données.
@@ -27,6 +25,10 @@ public class Schedule {
     this.edt = new HashMap<> ();
   }
 
+/**
+	* Retourne l'emploi du temps.
+	* @return L'emploi du temps.
+*/
   public HashMap<Activity, GregorianCalendar> getEdt(){
     return this.edt;
   }
@@ -57,16 +59,7 @@ public class Schedule {
     }
     return true;
   }
-/*
-  public boolean satisfies (Collection<PrecedenceConstraint> toutesContraintes) {
-      for (PrecedenceConstraint contrainte: toutesContraintes) {
-        if (!contrainte.isSatisfied(this.edt.get(contrainte.first), this.edt.get(contrainte.second))) {
-          return false;
-        }
-      }
-      return true;
-    }
-*/
+
 /**
 	* Trie les activités de l'emploi du temps par ordre chronologique.
 	* @return La liste des activités triée par ordre chronologique.
@@ -81,7 +74,7 @@ public class Schedule {
     while (Ltemp.size() != 0) {
       min = 0;
       for (int i = 0; i < Ltemp.size(); i++) {
-        if (edt.get(Ltemp.get(i)).compareTo(edt.get(Ltemp.get(min))) < 0) {
+        if (edt.get(Ltemp.get(i)).compareTo(edt.get(Ltemp.get(min))) <= 0) {
           min = i;
         }
       }

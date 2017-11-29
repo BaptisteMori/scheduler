@@ -10,11 +10,28 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
+/**
+	* Classe permettant la création de listes d'activités et de contraintes pour construire un emploi du temps, via la lecture
+	* de fichiers texte formatés.
+	* @see Activity
+	* @see PrecedenceConstraint
+	* @see MeetConstraint
+	* @see MaxSpanConstraint
+*/
 public class ScheduleReader {
 
+/**
+	* Constructeur de la classe.
+*/
 	public ScheduleReader() {
 	}
 
+/**
+	* Lit un fichier texte et en extrait une Map d'activités avec un identifiant comme clé.
+	* @param filename
+	* Nom du fichier à lire.
+	* @return Un dictionnaire de paires identifiant-activité.
+*/
 	public Map<String, Activity> readActivities(String filename) throws IOException {
 		try {
 			BufferedReader fileReader = new BufferedReader(new FileReader(filename));
@@ -33,6 +50,12 @@ public class ScheduleReader {
 		}
 	}
 
+/**
+	* Transforme une Map d'activités en une liste.
+	* @param map
+	* Le dictionnaire à transformer.
+	* @return Une liste des paires contenues dans le dictionnaire.
+*/
 	public ArrayList<Activity> getActivities(Map<String, Activity> map) {
 		ArrayList<Activity> activities = new ArrayList<> ();
 		for (Map.Entry<String, Activity> elt : map.entrySet()) {
@@ -41,9 +64,18 @@ public class ScheduleReader {
 		return activities;
 	}
 
-
-	public Collection<BinaryConstraint> buildPreceMeetCollection (Map<String,Activity> activities, String fileConstraintsName, String separator) throws IOException {
-		BufferedReader fileReader = new BufferedReader(new FileReader(fileConstraintsName));
+/**
+	* Lit un fichier texte et en extrait une liste de contraintes de précédence (éventuellement immédiate).
+	* @param activities
+	* Dictionnaire de paires identifiant-activité.
+	* @param constraintsFilename
+	* Nom du fichier à lire.
+	* @param separator
+	* Séparateur à utliser lors de la lecture du fichier.
+	* @return Une collection de contraintes binaires de même type.
+*/
+	public Collection<BinaryConstraint> buildPreceMeetCollection (Map<String,Activity> activities, String  constraintsFilename, String separator) throws IOException {
+		BufferedReader fileReader = new BufferedReader(new FileReader(constraintsFilename));
 		IdStringReader constraintReader = new IdStringReader(fileReader, separator);
 		Collection<BinaryConstraint> listePrecedence = new ArrayList<> ();
 		OrderedPair<String,String> line = constraintReader.read();
@@ -60,25 +92,29 @@ public class ScheduleReader {
 			}
 			line = constraintReader.read();
 		}
-
 		return listePrecedence;
 	}
 
-	public ArrayList<MaxSpanConstraint> buildMaxSpanCollection (Map<String,Activity> activities, String fileConstraintsName) throws IOException {
-		BufferedReader fileReader = new BufferedReader(new FileReader(fileConstraintsName));
+/**
+	* Lit un fichier texte et en extrait une liste de contraintes de durée maximale.
+	* @param activities
+	* Dictionnaire de paires identifiant-activité.
+	* @param constraintsFilename
+	* Nom du fichier à lire.
+	* @return Une liste de contraintes de durée maximale.
+*/
+	public ArrayList<MaxSpanConstraint> buildMaxSpanCollection (Map<String,Activity> activities, String constraintsFilename) throws IOException {
+		BufferedReader fileReader = new BufferedReader(new FileReader(constraintsFilename));
 		IdStringReader ConstraintReader = new IdStringReader(fileReader, "_within_");
 		ArrayList<MaxSpanConstraint> listeMaxSpan = new ArrayList<> ();
 		OrderedPair<String,String> line = ConstraintReader.read();
-
 		while (line != null) {
 			String chartmp=line.getFirst();
 			ArrayList<String> listetmp = new ArrayList<String>(Arrays.asList(chartmp.split(", ")));
 			ArrayList<Activity> list_act = new ArrayList<> ();
-
 			for(String x : listetmp){
 				list_act.add(activities.get(x));
 			}
-
 			int duree = Integer.parseInt(line.getSecond());
 			MaxSpanConstraint contrainte = new MaxSpanConstraint(list_act,duree);
 			listeMaxSpan.add(contrainte);

@@ -5,7 +5,7 @@ import java.util.GregorianCalendar;
 /**
 	* Fille de PrecedenceConstraint. Cette classe prend également en compte
 	* un intervalle entre la fin de la première activité et le début de la seconde.
-	* @see PrecedenceConstraint
+	* @see Activity
 */
 public class PrecedenceConstraintWithDuration extends PrecedenceConstraint {
 

@@ -3,6 +3,7 @@ package edt_java;
 import java.util.GregorianCalendar;
 
 /**
+	* Hérite de la classe abstraite BinaryConstraint.
 	* Représente une contrainte de précédence entre deux créneaux horaires de la classe <b>Activity</b>.
 	* @see Activity
 */
@@ -11,19 +12,27 @@ public class PrecedenceConstraint extends BinaryConstraint {
 /**
 	* Constructeur de la classe.
 	* @param first
-	* Activité devant être planifiée en premier.
+	* Activité devant être planifiée en premier (variable héritée).
 	* @param second
-	* Activité devant être planifiée en second.
+	* Activité devant être planifiée en second (variable héritée).
 */
   public PrecedenceConstraint(Activity first, Activity second){
     super(first,second);
   }
 
+/**
+	* Retourne l'activité à planifier en premier.
+	* @return L'activité à planifier en premier.
+*/
   @Override
   public Activity getFirst() {
     return this.first;
   }
 
+/**
+	* Retourne l'activité à planifier en second.
+	* @return L'activité à planifier en second.
+*/
   @Override
   public Activity getSecond() {
     return this.second;
